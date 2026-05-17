@@ -6,7 +6,7 @@
 
 **Generative Completeness** and **Logical Boundary State** Theory — Formalization of the reconstruction of Gödel's incompleteness theorems under the **True Circular Self-Consistency (TCSC)** axiom of Yuanxian Theory (YXT).
 
-This repository provides a complete formalization in **Lean 4** (with optional Coq support) showing that Gödel-type self-referential propositions naturally converge to a **Boundary State** (third modal value) within the $T^｛64｝$ topology, thereby achieving **Generative Completeness**.
+This repository provides a complete formalization in **Lean 4** (with optional Coq support) showing that Gödel-type self-referential propositions naturally converge to a **Boundary State** (third modal value) within the $T^{64}$ topology, thereby achieving **Generative Completeness**.
 
 ## Key Contributions
 
