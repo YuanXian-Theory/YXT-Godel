@@ -24,3 +24,21 @@ git clone https://github.com/YuanXian-Theory/YXT-Godel.git
 cd YXT-Godel/Lean
 lake exe cache get
 lake build
+
+Core Lean 4 Definitions & Theorems
+See Lean/YXT/GodelInYXT.lean for the main development.
+
+All core theorems are sorry-free, relying on the TCSCSystem axioms and derived fixed-point lemmas (defined in YXT/TCSC.lean).
+Related Resources
+•  Paper PDF: paper/main.pdf (compile with latexmk -xelatex main.tex)
+•  Zenodo Collection: See bibliography in the paper
+•  Main YXT Formalization: YuanXian-Theory/YXT-Formalization
+
+Citation
+@misc{YXT-Godel2026,
+  author       = {Zhenyuan Acharya (真圆阿奢黎)},
+  title        = {Formalization of the Gödel Incompleteness Theorems in the YXT Framework},
+  year         = {2026},
+  howpublished = {\url{https://github.com/YuanXian-Theory/YXT-Godel}},
+  note         = {Zenodo DOI: 10.5281/zenodo.xxxxxxx}
+}
