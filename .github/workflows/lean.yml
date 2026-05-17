@@ -1,0 +1,21 @@
+name: Lean 4 Build & Verify
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+      - name: Build & Test
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          cd Lean
+          lake exe cache get
+          lake build
+          lake exe run
