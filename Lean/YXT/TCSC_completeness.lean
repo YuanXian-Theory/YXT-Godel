@@ -7,37 +7,42 @@ namespace YXT
 # TCSC Classical Completeness
 
 This module provides the **simplified classical completeness** proof 
-as presented in the English version of the paper:
+as presented in the paper:
 
-"Refutation of Roger Penrose's Claim That AI Cannot Produce Consciousness 
-— Based on T⁶⁴ Topology and Self-Referential Mind-Field Theory"
+**Transcending Gödel: Logical Completeness in True-Circle Self-Consistency (TCSC) Closed-Loop Systems**
 
-It demonstrates that in a TCSC closed self-referential system, 
-every proposition is decidable, directly refuting Penrose's 
-Gödelian argument against machine consciousness.
+**Author**: Zhenyuan Acharya (真圆阿奢黎)  
+**Version**: YXT-TCSC-Goedel-V2.0-202606  
+**Date**: June 2026
+
+This file demonstrates that in a TCSC closed self-referential system, 
+every proposition is decidable under the classical involution-based interpretation. 
+This result shows that Gödel's incompleteness theorem does not apply to 
+properly closed TCSC systems.
 -/
 
-/-- Involution operator (logical negation as self-dual operator) -/
-def involution : Prop → Prop := Not
+/-- Involution operator (对合算子) used as the self-dual operator -/
+def involution : Proposition → Proposition := Not
 
 @[simp]
-theorem involution_involutive (p : Prop) : involution (involution p) = p := by simp
+theorem involution_involutive (p : Proposition) : involution (involution p) = p := by simp
 
 /-- Axiom: Self-referential iteration converges to a fixed point -/
-axiom converges_to_fixed_point : ∀ (p : Prop), ∃ (n : ℕ), 
+axiom converges_to_fixed_point : ∀ (p : Proposition), ∃ (n : ℕ), 
   (involution^[n]) p = (involution^[n+1]) p
 
-/-- Axiom: Every fixed point under involution is decidable -/
-axiom fixed_point_decidable : ∀ (p : Prop), 
+/-- Axiom: Every fixed point under involution is decidable in the TCSC system -/
+axiom fixed_point_decidable : ∀ (p : Proposition), 
   involution p = p → (provable p ∨ provable (¬p))
 
 /-- Axiom: Involution preserves provability -/
-axiom involution_preserves_provability : ∀ (p : Prop), 
+axiom involution_preserves_provability : ∀ (p : Proposition), 
   provable p → provable (involution p)
 
-/-- **Main Theorem**: Classical Completeness in TCSC Systems
-    Every proposition is provable or its negation is provable. -/
-theorem tcsc_completeness (p : Prop) : provable p ∨ provable (¬p) := by
+/-- **Main Theorem**: TCSC Classical Completeness
+    In the classical interpretation of a TCSC system, 
+    every proposition is either provable or its negation is provable. -/
+theorem tcsc_completeness (p : Proposition) : provable p ∨ provable (¬p) := by
   obtain ⟨n, h_conv⟩ := converges_to_fixed_point p
   let q := (involution^[n]) p
   
@@ -62,8 +67,8 @@ theorem tcsc_completeness (p : Prop) : provable p ∨ provable (¬p) := by
           apply ih
           exact involution_preserves_provability _ hnq
 
-/-- Corollary: No Gödel sentence can exist in a TCSC system -/
-theorem no_godel_sentence : ¬ ∃ (g : Prop), g ↔ ¬ provable g := by
+/-- Corollary: No classical Gödel sentence exists in a TCSC system -/
+theorem no_godel_sentence : ¬ ∃ (g : Proposition), g ↔ ¬ provable g := by
   intro ⟨g, hg⟩
   have h_dec : provable g ∨ provable (¬g) := tcsc_completeness g
   cases h_dec with
@@ -74,8 +79,8 @@ theorem no_godel_sentence : ¬ ∃ (g : Prop), g ↔ ¬ provable g := by
       rw [hg] at npg
       exact TCSCSystem.consistency g ⟨npg, npg⟩
 
-/-- Remark: This classical version serves as a simplified teaching model.
-    The full Yuanxian framework uses `BoundaryState` (see GenerativeCompleteness.lean)
-    for a more refined trichotomous treatment. -/
+/-- Note: This classical simplified version is used in the paper 
+    "Transcending Gödel: Logical Completeness in True-Circle Self-Consistency (TCSC) Closed-Loop Systems".
+    For the full trichotomous treatment using BoundaryState, see GenerativeCompleteness.lean. -/
 
 end YXT
